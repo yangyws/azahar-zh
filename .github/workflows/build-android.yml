@@ -1,0 +1,65 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main-zh
+  workflow_dispatch:
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    env:
+      CCACHE_DIR: ${{ github.workspace }}/.ccache
+      CCACHE_COMPILERCHECK: content
+      CCACHE_SLOPPINESS: time_macros
+      OS: android
+      TARGET: universal
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Set up cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ${{ env.CCACHE_DIR }}
+          key: ${{ runner.os }}-android-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-android-
+      - name: Set tag name
+        run: |
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+              echo "GIT_TAG_NAME=$GITHUB_REF_NAME" >> $GITHUB_ENV
+          fi
+          echo $GIT_TAG_NAME
+      - name: Deps
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install ccache apksigner -y
+      - name: Update Android SDK CMake version
+        run: |
+          echo "y" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "cmake;3.30.3"
+      - name: Build
+        run: JAVA_HOME=$JAVA_HOME_17_X64 ./.ci/android.sh
+        env:
+          ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASS }}
+      - name: Pack APKs
+        run: |
+          mkdir -p artifacts
+          for f in src/android/app/build/outputs/apk/*/*/*.apk src/android/app/build/bundle/*.apk; do
+            if [ -f "$f" ]; then
+              echo "Found APK: $f"
+              cp "$f" artifacts/
+            fi
+          done
+          ls -la artifacts/
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: azahar-android-apk
+          path: artifacts/*.apk
