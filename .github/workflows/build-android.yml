@@ -51,12 +51,7 @@ jobs:
       - name: Pack APKs
         run: |
           mkdir -p artifacts
-          for f in src/android/app/build/outputs/apk/*/*/*.apk src/android/app/build/bundle/*.apk; do
-            if [ -f "$f" ]; then
-              echo "Found APK: $f"
-              cp "$f" artifacts/
-            fi
-          done
+          find src/android/app/build -type f -name "*.apk" -exec cp {} artifacts/ \;
           ls -la artifacts/
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
