@@ -738,7 +738,7 @@
     <string name="language_italian">義大利語（Italiano）</string>
     <string name="language_spanish">西班牙語（Español）</string>
     <string name="language_simplified_chinese">簡體中文</string>
-    <string name="language_korean">朝鮮語（한국어）</string>
+    <string name="language_korean">韓語（한국어）</string>
     <string name="language_dutch">荷蘭語（Nederlands）</string>
     <string name="language_portuguese">葡萄牙語（Português）</string>
     <string name="language_russian">俄語（Русский）</string>
@@ -882,10 +882,10 @@
     <string name="isle_of_man">馬恩島</string>
     <string name="jersey">澤西島</string>
     <string name="monaco">摩納哥</string>
-    <string name="taiwan">中國臺灣</string>
+    <string name="taiwan">台灣</string>
     <string name="south_korea">韓國</string>
-    <string name="hong_kong">中國香港</string>
-    <string name="macau">中國澳門</string>
+    <string name="hong_kong">香港</string>
+    <string name="macau">澳門</string>
     <string name="indonesia">印度尼西亞</string>
     <string name="singapore">新加坡</string>
     <string name="thailand">泰國</string>
