@@ -154,6 +154,6 @@ AppImage 提供兩種版本：`azahar.AppImage` 與 `azahar-wayland.AppImage`。
 
 # 社群交流 (Join the Conversation)
 
-我們擁有社群 Discord 伺服器，歡迎在此暢聊專案、獲取最新公告、或與開發者協調模擬器進度。
+我們擁有社群 Discord 伺服器，歡迎在此暢聊專案、取得最新公告、或與開發者協調模擬器進度。
 
 歡迎加入：https://discord.gg/4ZjMpAp3M6
