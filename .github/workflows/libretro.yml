@@ -2,7 +2,10 @@ name: citra-libretro
 
 on:
   push:
-    branches: [ "*" ]
+    branches:
+      - '*'
+      - '!main-zh'
+      - '!i18n-zh'
     tags: [ "*" ]
   pull_request:
     branches: [ master ]

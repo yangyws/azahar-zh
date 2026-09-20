@@ -4,6 +4,30 @@
 
 ---
 
+## 🔖 [MOD-20260920-17] 隔離外部依賴與排查 libretro / format 工作流錯誤
+
+* **修改日期**：2026-09-20
+* **目標分支**：`main-zh`
+* **修改分類**：`[CI/CD 優化 / 分支過濾防護]`
+* **涉及檔案清單**：
+  * 修改：`.github/workflows/libretro.yml`（push 觸發條件排除 `main-zh` 與 `i18n-zh` 分支）
+  * 修改：`.github/workflows/format.yml`（push 觸發條件排除 `main-zh` 與 `i18n-zh` 分支）
+  * 修改：`CHANGELOG.md`（記錄變更日誌與排查索引追溯）
+* **修改動機與問題**（Why）：
+  * 推送至 `main-zh` 分支時，觸發了未排除該分支的 `citra-libretro` 與 `citra-format` 工作流。
+  * `citra-libretro` 工作流中的 `windows` 任務嘗試自外部私有 Registry 拉取映像檔 `git.libretro.com:5050/libretro-infrastructure/libretro-build-mxe-win-cross-cores:mingw12`。因外部伺服器連線超時，產生致命錯誤：
+    `Error response from daemon: Get "https://git.libretro.com:5050/v2/": context deadline exceeded`、`Error: Process completed with exit code 1`。
+  * `main-zh` 分支的核心定位為 AzaharPlus Android 掌機繁體中文版之發行與 APK 雲端編譯發布，非 libretro 核心發布或桌面版編譯，觸發此類工作流不僅徒增 CI 計算資源浪費，更因第三方服務不穩定導致假警報中斷流程。
+* **技術方案與關鍵決策**（How）：
+  1. **比照 `build.yml` 標準過濾規範**：在 `.github/workflows/libretro.yml` 的 `on.push.branches` 中增設 `- '!main-zh'` 與 `- '!i18n-zh'` 排除規則。
+  2. **全面防護程式碼格式工作流**：在 `.github/workflows/format.yml` 的 `on.push.branches` 同步增設 `- '!main-zh'` 與 `- '!i18n-zh'` 排除規則，避免多餘的 clang-format 容器任務干擾。
+  3. **確保主管線專注運行**：確保推送到 `main-zh` 時僅專注觸發 `Build Android APK`（`build-android.yml`）建置工作流，徹底隔絕外部非必要依賴風險。
+* **測試與驗證結果**（Verification）：
+  * YAML 語法與縮排結構檢驗合規，分支名稱正規表達模式相符。
+  * 各工作流觸發條件比對一致，達成與 `build.yml` 相同之分支隔離目標。
+
+---
+
 ## 🔖 [MOD-20260920-16] 修復 Android 語系設定衝突與雲端 APK 建置管線優化
 
 * **修改日期**：2026-09-20

@@ -2,7 +2,10 @@ name: citra-format
 
 on:
   push:
-    branches: [ "*" ]
+    branches:
+      - '*'
+      - '!main-zh'
+      - '!i18n-zh'
   pull_request:
     branches: [ master ]
 
