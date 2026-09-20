@@ -1,3 +1,7 @@
+﻿**English** | [台灣繁體中文](README.zh-TW.md)
+
+---
+
 <b>AzaharPlus</b> is a fork of the Azahar 3DS emulator with extra features.
 
 Each version is the same as the corresponding version of Azahar exept for this:
