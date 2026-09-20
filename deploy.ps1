@@ -1,4 +1,4 @@
-﻿param(
+param(
     [string]$ApkPath = "",
     [switch]$LaunchApp = $true,
     [string]$DeviceId = "",
@@ -10,7 +10,7 @@ $ErrorActionPreference = "Stop"
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host "  AzaharPlus ZH 掌機 / Android 設備自動部署管線 (ADB)" -ForegroundColor Cyan
+Write-Host "  AzaharPlus-zh 掌機 / Android 設備自動部署管線 (ADB)" -ForegroundColor Cyan
 Write-Host "  套件識別碼: io.github.lime3ds.android.zh" -ForegroundColor Cyan
 Write-Host "  追蹤索引: [MOD-20260920-15]" -ForegroundColor DarkGray
 Write-Host "==========================================================" -ForegroundColor Cyan
@@ -362,7 +362,7 @@ if ($installStr -match "INSTALL_FAILED_UPDATE_INCOMPATIBLE") {
 }
 
 if ($installStr -match "Success") {
-    Write-Host "[成功] AzaharPlus ZH 已成功安裝至設備！" -ForegroundColor Green
+    Write-Host "[成功] AzaharPlus-zh 已成功安裝至設備！" -ForegroundColor Green
     
     # 驗證共存狀態
     Write-Host "`n[共存驗證] 檢查設備上 Lime3DS 相關套件安裝狀態：" -ForegroundColor Cyan
@@ -381,7 +381,7 @@ if ($installStr -match "Success") {
 # 5. 啟動 App
 if ($LaunchApp) {
     $mainActivity = "org.citra.citra_emu.ui.main.MainActivity"
-    Write-Host "`n正在喚醒設備螢幕並啟動 AzaharPlus ZH ($packageName)..." -ForegroundColor Yellow
+    Write-Host "`n正在喚醒設備螢幕並啟動 AzaharPlus-zh ($packageName)..." -ForegroundColor Yellow
     & $adbCmd -s $DeviceId shell input keyevent 224 2>$null
     & $adbCmd -s $DeviceId shell wm dismiss-keyguard 2>$null
     & $adbCmd -s $DeviceId shell am start -n "$packageName/$mainActivity" | Out-Null
@@ -389,5 +389,5 @@ if ($LaunchApp) {
 }
 
 Write-Host "`n==========================================================" -ForegroundColor Cyan
-Write-Host "  AzaharPlus ZH 自動部署流程全部完成！" -ForegroundColor Cyan
+Write-Host "  AzaharPlus-zh 自動部署流程全部完成！" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan

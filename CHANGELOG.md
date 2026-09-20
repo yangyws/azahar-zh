@@ -4,6 +4,27 @@
 
 ---
 
+## 🔖 [MOD-20260921-03] 掌機獨立共存版應用程式名稱正名為 AzaharPlus-zh (小寫 -zh 規範)
+
+* **修改日期**：2026-09-21
+* **目標分支**：`main-zh`
+* **修改分類**：`[掌機共存規格規範 / 介面命名校正]`
+* **涉及檔案清單**：
+  * 修改：`src/android/app/src/main/res/values/strings.xml`（`app_name` 改為 `AzaharPlus-zh`）
+  * 修改：`src/android/app/src/main/res/values-b+zh+TW/strings.xml`（`app_name` 改為 `AzaharPlus-zh`）
+  * 修改：`deploy.bat`（標題與訊息更新為 `AzaharPlus-zh`）
+  * 修改：`deploy.ps1`（部署提示與終端訊息更新為 `AzaharPlus-zh`）
+  * 修改：`CHANGELOG.md`（記錄變更日誌與索引追溯）
+* **修改動機與問題**（Why）：
+  * 遵照使用者明確指令：共存版名稱一律嚴格採用小寫 `-zh` 後綴（`AzaharPlus-zh`），將原先之 `AzaharPlus ZH` 全面正名對齊全域規範。
+* **技術方案與關鍵決策**（How）：
+  1. 將 `values/strings.xml` 與 `values-b+zh+TW/strings.xml` 中之 `app_name` 統一設為 `AzaharPlus-zh`。
+  2. 同步更新掌機自動部署腳本（`deploy.bat`、`deploy.ps1`）之輸出標籤為 `AzaharPlus-zh`。
+* **測試與驗證結果**（Verification）：
+  * XML 結構與語法驗證通過，字串資源皆已精確更新。
+
+---
+
 ## 🔖 [MOD-20260920-23] 台灣稱謂嚴格修正與選單主題陣列繁體中文化
 
 * **修改日期**：2026-09-20

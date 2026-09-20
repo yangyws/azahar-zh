@@ -1,10 +1,10 @@
 @echo off
 chcp 65001 >nul
 cd /d "%~dp0"
-title AzaharPlus ZH 掌機自動部署工具 [MOD-20260920-15]
+title AzaharPlus-zh 掌機自動部署工具 [MOD-20260920-15]
 
 echo ==========================================================
-echo   AzaharPlus ZH 掌機 / Android 設備自動部署程序
+echo   AzaharPlus-zh 掌機 / Android 設備自動部署程序
 echo ==========================================================
 echo.
 
