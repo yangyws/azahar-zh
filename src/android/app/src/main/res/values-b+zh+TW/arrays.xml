@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 台灣繁體中文在地化資源 (zh-TW) for AzaharPlus -->
+<!-- 100% 符合 Android 官方標準多語系與台灣繁體中文用語規範 -->
+<resources>
+    <string-array name="staticThemeNames">
+        <item>藍色 (預設)</item>
+        <item>青色</item>
+        <item>紅色</item>
+        <item>綠色</item>
+        <item>黃色</item>
+        <item>橘色</item>
+        <item>紫羅蘭色</item>
+        <item>粉紅色</item>
+        <item>灰色</item>
+    </string-array>
+</resources>

@@ -51,7 +51,8 @@
         android:allowBackup="false"
         android:supportsRtl="true"
         android:banner="@mipmap/ic_launcher"
-        android:requestLegacyExternalStorage="true">
+        android:requestLegacyExternalStorage="true"
+        android:localeConfig="@xml/locales_config">
 
         <meta-data android:name="android.game_mode_config"
             android:resource="@xml/game_mode_config" />
