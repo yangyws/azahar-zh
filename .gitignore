@@ -64,3 +64,4 @@ GIT-TAG
 # Local build and download artifacts
 apks/
 *.zip
+artifacts/
