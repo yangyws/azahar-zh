@@ -4,6 +4,33 @@
 
 ---
 
+## 🔖 [MOD-20260921-05] 修復線上編譯跨平台 CI 腳本瑕疵與 Android C++ 編譯錯誤
+
+* **修改日期**：2026-09-21
+* **目標分支**：`main-zh`
+* **修改分類**：`[CI/CD 修復 / C++ 常值修復 / 建置穩定性提升]`
+* **涉及檔案清單**：
+  * 修改：`src/common/android_utils.h`（引入 `<string_view>`，將 `AndroidBuildFlavors` 之 `std::string` 改為 `std::string_view`，修復 NDK Clang 之 constexpr 編譯錯誤）
+  * 修改：`.ci/windows.sh`、`.ci/linux.sh`、`.ci/docker.sh`、`.ci/ios.sh`、`.ci/macos.sh`、`.ci/macos-universal.sh`、`.ci/transifex.sh`（改用 `mkdir -p build` 避免目錄已存在時中斷）
+  * 修改：`.ci/source.sh`（改用 `mkdir -p artifacts`，恢復安裝 `git-archive-all` 確保打包原始碼成功）
+  * 修改：`.ci/clang-format.sh`（限制格式與結尾空白檢查僅針對當前分支修改之檔案，避免因母庫既有歷史程式碼違規而中斷）
+  * 修改：`CHANGELOG.md`（記錄變更日誌與索引追溯）
+* **修改動機與問題**（Why）：
+  * 線上 GitHub Actions 多個工作流回報錯誤：
+    1. `citra-libretro` 之 `android` 任務在編譯時報錯：`error: constexpr variable 'GOOGLEPLAY' must be initialized by a constant expression`，主因為 C++ 中 `std::string` 不支援作為 constexpr 型別。
+    2. `citra-build` 之 `windows (msvc)` 與 `linux (fresh)` 因 `mkdir build` 目錄已存在而報錯退出。
+    3. `citra-build` 之 `source` 因原廠腳本缺少 `git-archive-all` 指令而失敗。
+    4. `citra-format` 在 push 時因對全專案掃描結尾空白，踩到原廠既有之 200 多行空白違規而中斷。
+* **技術方案與關鍵決策**（How）：
+  1. 將 `android_utils.h` 中的 `GOOGLEPLAY` 與 `VANILLA` 常值型別替換為 `std::string_view`，相容 C++20 constexpr 且可無縫與 `std::string` 比較。
+  2. 全面將 CI 腳本中之 `mkdir build` 與 `mkdir artifacts` 替換為具備等冪性之 `mkdir -p`。
+  3. 在 `source.sh` 中啟用 `pip3 install git-archive-all --break-system-packages`，確保原始碼打包工具可用。
+  4. 精修 `clang-format.sh`，在分支推播時僅檢查相較於基準分支變更之檔案，隔絕母庫歷史包袱。
+* **測試與驗證結果**（Verification）：
+  * 語法與型別宣告檢驗通過，CI 腳本結構正規，工作區變更整潔。
+
+---
+
 ## 🔖 [MOD-20260921-03] 掌機獨立共存版應用程式名稱正名為 AzaharPlus-zh (小寫 -zh 規範)
 
 * **修改日期**：2026-09-21
