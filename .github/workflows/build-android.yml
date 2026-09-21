@@ -6,6 +6,9 @@ on:
       - main-zh
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   android:
     runs-on: ubuntu-latest
@@ -52,9 +55,31 @@ jobs:
         run: |
           mkdir -p artifacts
           find src/android/app/build -type f -name "*.apk" -exec cp {} artifacts/ \;
+          APK_FILE=$(find artifacts -name "*.apk" | head -n 1)
+          if [ -n "$APK_FILE" ]; then
+            cp "$APK_FILE" artifacts/AzaharPlus-zh.apk
+          fi
           ls -la artifacts/
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: azahar-android-apk
           path: artifacts/*.apk
+      - name: Publish GitHub Release
+        if: github.ref == 'refs/heads/main-zh'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v2126-zh
+          name: "AzaharPlus-zh 掌機繁體中文共存版"
+          body: |
+            ### 🎮 AzaharPlus-zh 掌機繁體中文共存版
+
+            - **掌機獨立包名**：`io.github.lime3ds.android.zh`（可與官方原版並存安裝，互不干擾衝突）
+            - **完整在地化**：100% 台灣繁體中文前端介面與選單主題陣列支援
+            - **原生語系架構**：相容 Android 13+ 原生多語系熱切換
+          files: artifacts/AzaharPlus-zh.apk
+          draft: false
+          prerelease: false
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

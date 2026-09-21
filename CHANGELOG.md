@@ -4,6 +4,25 @@
 
 ---
 
+## 🔖 [MOD-20260921-08] 新增 GitHub Releases 自動發布機制與 APK 正名歸檔
+
+* **修改日期**：2026-09-21
+* **目標分支**：`main-zh`
+* **修改分類**：`[CI/CD 部署管線增強 / 自動發布]`
+* **涉及檔案清單**：
+  * 修改：`.github/workflows/build-android.yml`
+  * 修改：`CHANGELOG.md`
+* **修改動機與問題**（Why）：
+  * 原先工作流僅上傳 Actions 暫存 Artifact，未建立 GitHub Release，導致使用者於儲存庫首頁的 Releases 區塊看不到 APK 下載點。
+* **技術方案與關鍵決策**（How）：
+  1. 在工作流中宣告 `permissions: contents: write`，賦予 GitHub Actions 發布 Release 的權限。
+  2. 在打包步驟中將產出的 APK 額外複製正名為 `AzaharPlus-zh.apk`。
+  3. 整合 `softprops/action-gh-release@v2`，當 `main-zh` 建置成功時，自動發布標籤為 `v2126-zh` 的正式 Release，並將 APK 直接附加於 Release 資源中供直接下載。
+* **測試與驗證結果**（Verification）：
+  * YAML 結構與權限定義檢驗無誤，產物命名符合掌機規範。
+
+---
+
 ## 🔖 [MOD-20260921-05] 修復線上編譯跨平台 CI 腳本瑕疵與 Android C++ 編譯錯誤
 
 * **修改日期**：2026-09-21
