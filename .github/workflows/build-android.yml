@@ -54,30 +54,36 @@ jobs:
       - name: Pack APKs
         run: |
           mkdir -p artifacts
-          find src/android/app/build -type f -name "*.apk" -exec cp {} artifacts/ \;
-          APK_FILE=$(find artifacts -name "*.apk" | head -n 1)
-          if [ -n "$APK_FILE" ]; then
-            cp "$APK_FILE" artifacts/AzaharPlus-zh.apk
-          fi
           ls -la artifacts/
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: azahar-android-apk
           path: artifacts/*.apk
+
       - name: Publish GitHub Release
         if: github.ref == 'refs/heads/main-zh'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v2126-zh
-          name: "AzaharPlus-zh 掌機繁體中文共存版"
+          name: "AzaharPlus-zh 掌機繁體中文化版 (共存版 / 取代版)"
           body: |
-            ### 🎮 AzaharPlus-zh 掌機繁體中文共存版
+            ### 🎮 AzaharPlus-zh 掌機繁體中文化版
 
-            - **掌機獨立包名**：`io.github.lime3ds.android.zh`（可與官方原版並存安裝，互不干擾衝突）
             - **完整在地化**：100% 台灣繁體中文前端介面與選單主題陣列支援
             - **原生語系架構**：相容 Android 13+ 原生多語系熱切換
-          files: artifacts/AzaharPlus-zh.apk
+
+            #### 📦 版本選擇指南：
+            1. **`AzaharPlus-coexist-zh.apk`（獨立共存版）**
+               - **套件名稱**：`io.github.lime3ds.android.zh`
+               - 可與原版 Citra / Lime3DS 並存安裝，設定與資料完全獨立。
+            2. **`AzaharPlus-replace-zh.apk`（原版取代版）**
+               - **套件名稱**：`io.github.lime3ds.android`（同官方原版套件名稱）
+               - 可直接覆蓋取代原版，掌機前端（如 Daijishō、Pegasus、ES-DE）無需修改任何 Player 設定即可直接喚醒啟動！
+          files: |
+            artifacts/AzaharPlus-coexist-zh.apk
+            artifacts/AzaharPlus-replace-zh.apk
           draft: false
           prerelease: false
           make_latest: true

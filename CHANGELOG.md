@@ -4,6 +4,30 @@
 
 ---
 
+## 🔖 [MOD-20260922-03] 支援雙規格產出：獨立共存版與原版取代版自動建置與 Release 發布
+
+* **修改日期**：2026-09-22
+* **目標分支**：`main-zh`
+* **修改分類**：`[建置架構增強 / 多規格發布 / 自動化建置]`
+* **涉及檔案清單**：
+  * 修改：`src/android/app/build.gradle.kts`
+  * 修改：`.ci/android.sh`
+  * 修改：`.github/workflows/build-android.yml`
+  * 修改：`CHANGELOG.md`
+* **修改動機與問題**（Why）：
+  * 掌機前端（如 Daijishō、Pegasus、ES-DE）預設播放器設定皆綁定官方原版套件名稱（`io.github.lime3ds.android`）。先前僅產出共存版（`io.github.lime3ds.android.zh`），導致玩家在未深入調整前端 Player 腳本前無法由前端喚醒。
+  * 需同時產出獨立共存版（並存測試）與原版取代版（前端開箱即用），滿足不同情境需求。
+* **技術方案與關鍵決策**（How）：
+  1. 在 `build.gradle.kts` 中將 `applicationId` 支援 `project.findProperty("customAppId") as String? ?: "io.github.lime3ds.android.zh"` 動態指定。
+  2. 更新 `.ci/android.sh` 與工作流，連續建置產出：
+     - `AzaharPlus-coexist-zh.apk`（套件名：`io.github.lime3ds.android.zh`）
+     - `AzaharPlus-replace-zh.apk`（套件名：`io.github.lime3ds.android`）
+  3. 更新 GitHub Release 說明與附件，雙產物命名皆嚴格遵循小寫 `-zh.apk` 標準。
+* **測試與驗證結果**（Verification）：
+  * Gradle 腳本語法與 CI 工作流配置驗證無誤。
+
+---
+
 ## 🔖 [MOD-20260921-08] 新增 GitHub Releases 自動發布機制與 APK 正名歸檔
 
 * **修改日期**：2026-09-21
