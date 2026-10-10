@@ -1,6 +1,6 @@
 // Copyright 2023-2026 Citra Emulator Project / Azahar Emulator Project
-// Licensed under GPLv2 or any later version
-// Refer to the license.txt file included.
+// Licensed under GPLv3 or any later version
+// Refer to the LICENSE.txt file included.
 
 package org.citra.citra_emu
 
@@ -419,11 +419,11 @@ object NativeLibrary {
             } else {
                 alertResult = false
                 builder
-                    .setPositiveButton(android.R.string.yes) { _: DialogInterface, _: Int ->
+                    .setPositiveButton(android.R.string.ok) { _: DialogInterface, _: Int ->
                         alertResult = true
                         synchronized(alertLock) { alertLock.notify() }
                     }
-                    .setNegativeButton(android.R.string.no) { _: DialogInterface, _: Int ->
+                    .setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int ->
                         alertResult = false
                         synchronized(alertLock) { alertLock.notify() }
                     }
@@ -811,7 +811,10 @@ object NativeLibrary {
                 "NativeLibrary",
                 "Successfully resolved URI of type PRIMARY: $uri)"
             )
-            return primaryStoragePath + dirSep + virtualPath
+            if(virtualPath.startsWith(primaryStoragePath))
+                return virtualPath
+            else
+                return primaryStoragePath + dirSep + virtualPath
         } else if (uriString // Path is likely located in the /Download folder
                 .startsWith("content://com.android.providers.downloads.documents/document/msf")
         ) {
@@ -841,7 +844,10 @@ object NativeLibrary {
                 "NativeLibrary",
                 "Successfully resolved URI of type DOWNLOAD with fileName '$fileName': $uri)"
             )
-            return downloadsPath + dirSep + fileName
+            if(fileName.startsWith(downloadsPath))
+                return fileName
+            else
+                return downloadsPath + dirSep + fileName
         } else { // Path is probably located on a removable storage device
             val storageIdString = pathSegment.substringBefore(":")
             val removablePath = RemovableStorageHelper.getRemovableStoragePath(
@@ -860,7 +866,10 @@ object NativeLibrary {
                 "NativeLibrary",
                 "Successfully resolved URI of type EXTERNAL: $uri)"
             )
-            return removablePath + dirSep + virtualPath
+            if(virtualPath.startsWith(removablePath))
+                return virtualPath
+            else
+                return removablePath + dirSep + virtualPath
         }
     }
 

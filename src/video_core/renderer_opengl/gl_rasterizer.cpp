@@ -1,6 +1,6 @@
 // Copyright 2022-2026 Citra Emulator Project / Azahar Emulator Project
 // Licensed under GPLv2 or any later version
-// Refer to the license.txt file included.
+// Refer to the misc/licenses/gplv2.txt file included.
 
 #include "common/alignment.h"
 #include "common/assert.h"
@@ -581,6 +581,11 @@ bool RasterizerOpenGL::Draw(bool accelerate, bool is_indexed) {
         return true;
     }
 
+    const auto draw_rect = fb_helper.DrawRect();
+    if (draw_rect.GetArea() == 0) {
+        return true;
+    }
+
     // Bind the framebuffer surfaces
     if (shadow_rendering) {
         state.image_shadow_buffer = framebuffer->Attachment(SurfaceType::Color);
@@ -598,7 +603,6 @@ bool RasterizerOpenGL::Draw(bool accelerate, bool is_indexed) {
 
     // Viewport can have negative offsets or larger dimensions than our framebuffer sub-rect.
     // Enable scissor test to prevent drawing outside of the framebuffer region
-    const auto draw_rect = fb_helper.DrawRect();
     state.scissor.enabled = true;
     state.scissor.x = draw_rect.left;
     state.scissor.y = draw_rect.bottom;

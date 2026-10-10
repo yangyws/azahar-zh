@@ -1,6 +1,6 @@
 // Copyright 2014-2026 Citra Emulator Project / Azahar Emulator Project
 // Licensed under GPLv2 or any later version
-// Refer to the license.txt file included.
+// Refer to the misc/licenses/gplv2.txt file included.
 
 #include <iomanip>
 #include <memory>
@@ -135,6 +135,7 @@ void Config::ReadValues() {
 
     // Core
     ReadSetting("Core", Settings::values.use_cpu_jit);
+    ReadSetting("Core", Settings::values.use_fastinterp);
     ReadSetting("Core", Settings::values.cpu_clock_percentage);
 
     // Renderer
