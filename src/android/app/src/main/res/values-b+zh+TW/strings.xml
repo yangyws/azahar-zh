@@ -368,6 +368,8 @@
     <string name="sound_output_mode">聲音輸出模式</string>
     <string name="cpu_jit">CPU JIT 即時編譯</string>
     <string name="cpu_jit_description">使用即時編譯 (JIT) 進行 CPU 模擬。啟用後，遊戲效能將顯著提高。</string>
+    <string name="use_fastinterp">使用快速直譯器</string>
+    <string name="use_fastinterp_description">停用 CPU JIT 時，改用快速直譯器取代舊版直譯器。需要重新啟動。</string>
     <string name="hw_shaders">啟用硬體著色器</string>
     <string name="hw_shaders_description">使用硬體模擬 3DS 著色器。啟用後，遊戲效能將顯著提高。</string>
     <string name="cpu_clock_speed">CPU 時脈頻率</string>
