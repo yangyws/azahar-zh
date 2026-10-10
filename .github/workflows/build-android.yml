@@ -66,8 +66,8 @@ jobs:
         if: github.ref == 'refs/heads/main-zh'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v2126-zh
-          name: "AzaharPlus-zh 掌機繁體中文化版 (共存版 / 取代版)"
+          tag_name: v2126.2-zh
+          name: "AzaharPlus-zh 掌機繁體中文化版 v2126.2 (共存版 / 取代版)"
           body: |
             ### 🎮 AzaharPlus-zh 掌機繁體中文化版
 
