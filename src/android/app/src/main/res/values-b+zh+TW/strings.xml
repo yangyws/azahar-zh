@@ -1,4 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- ZipPass / StreetPass 資料匯入匯出 -->
+    <string name="grid_menu_core_export_zippass">匯出 ZipPass 資料</string>
+    <string name="grid_menu_core_import_zippass">匯入 ZipPass 資料</string>
+    <string name="export_zippass_description">將 StreetPass 資料匯出為 ZIP 壓縮檔</string>
+    <string name="import_zippass_description">從 ZIP 壓縮檔匯入 StreetPass 資料</string>
+    <string name="clear_streetpass_config">清除 StreetPass 設定</string>
+    <string name="clear_streetpass_config_description">當 ZipPass 發生問題時使用</string>
+    <string name="zippass_file_not_found">匯入失敗，找不到 ZipPass 檔案。</string>
+    <string name="zippass_import_successful">匯入成功。</string>
+    <string name="zippass_import_failed">匯入失敗。</string>
+    <string name="zippass_import_nothing">沒有可匯入的項目。</string>
+    <string name="zippass_export_successful">匯出成功。</string>
+    <string name="zippass_export_failed">匯出失敗。</string>
+    <string name="zippass_export_nothing">沒有可匯出的項目。</string>
+    <string name="zippass_clear_success">清除成功。</string>
 
-    </resources>
+    <!-- 通知權限與其他設定 -->
+    <string name="notifications">通知</string>
+    <string name="notifications_description">請點擊下方按鈕授予通知權限。</string>
+    <string name="filesystem_permission_warning">缺少權限</string>
+    <string name="turbo_limit_hotkey">加速速度</string>
+
+    <!-- 系統檔案下載 -->
+    <string name="system_files_download">下載系統檔案</string>
+    <string name="system_files_description">下載系統檔案以取得 Mii 資料、啟動 HOME 選單及更多功能</string>
+    <string name="download_system_files">下載系統檔案</string>
+    <string name="system_type">主機類型</string>
+    <string name="download">下載</string>
+    <string name="keys_missing">Azahar 缺少下載系統檔案所需的金鑰。</string>
+    <string name="how_to_get_keys">&lt;a href="https://web.archive.org/web/20240304203412/https://citra-emu.org/wiki/aes-keys/"&gt;如何取得金鑰？&lt;/a&gt;</string>
+    <string name="system_type_minimal">精簡版</string>
+    <string name="system_type_old_3ds">Old 3DS</string>
+    <string name="system_type_new_3ds">New 3DS</string>
+    <string name="downloading_files">正在下載檔案…</string>
+    <string name="downloading_files_description">請勿關閉應用程式。</string>
+    <string name="download_failed">下載失敗</string>
+    <string name="download_failed_description">請確認您已連線至網際網路後再試一次。</string>
+    <string name="download_success">下載完成！</string>
+    <string name="download_cancelled">已取消下載</string>
+    <string name="download_cancelled_description">請重新開始下載，以避免系統檔案不完整導致問題。</string>
+    <string name="home_menu_warning">系統檔案警告</string>
+    <string name="home_menu_warning_description">由於 Android 的儲存空間存取架構在讀取 Azahar 檔案時速度較慢，下載多個版本的系統檔案可能會大幅拖慢應用程式、即時存檔及應用程式列表的載入速度。建議僅下載您需要的檔案，以避免載入速度變慢。</string>
+
+    <!-- Wi-Fi Direct 多人連線 -->
+    <string name="multiplayer_wifi_direct">Wi-Fi Direct</string>
+    <string name="multiplayer_no_preferred_game">無</string>
+    <string name="multiplayer_prefered_game_name_invalid">您必須先選擇偏好應用程式才能建立房間。</string>
+    <string name="multiplayer_default_room_name">%1$s 的房間</string>
+    <string name="multiplayer_wifi_direct_searching">[ %1$s ]   正在搜尋附近裝置…</string>
+    <string name="multiplayer_wifi_direct_connecting">[ %1$s ]   正在連線至 %2$s…</string>
+    <string name="multiplayer_wifi_direct_setting_up_host">[ %1$s ]   正在建立房間…</string>
+    <string name="multiplayer_wifi_direct_setting_up_client">[ %1$s ]   正在加入房間…</string>
+    <string name="multiplayer_wifi_direct_error">Wi-Fi Direct 連線失敗</string>
+    <string name="multiplayer_wifi_direct_not_supported">此裝置不支援 Wi-Fi Direct</string>
+    <string name="multiplayer_wifi_direct_permission_needed">需要 Wi-Fi 權限，請授予權限後再試一次。</string>
+    <string name="multiplayer_wifi_direct_select_peer">[ %1$s ]   選擇要連線的裝置</string>
+</resources>
